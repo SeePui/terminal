@@ -1,18 +1,21 @@
+import { useAtom } from 'jotai';
 import React, { FC, MouseEvent, useCallback } from 'react';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { appProps } from 'src/library';
 
 export const WalletModalButton: FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
   const { connecting } = useWalletPassThrough();
+  const [atom] = useAtom(appProps);
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      if (window.Jupiter.enableWalletPassthrough && window.Jupiter.onRequestConnectWallet) {
-        window.Jupiter.onRequestConnectWallet();
+      if (atom?.enableWalletPassthrough && atom?.onRequestConnectWallet) {
+        atom.onRequestConnectWallet();
       } else {
         setIsWalletModalOpen(true);
       }
     },
-    [setIsWalletModalOpen],
+    [setIsWalletModalOpen, atom],
   );
 
   return (

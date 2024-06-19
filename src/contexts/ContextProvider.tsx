@@ -8,6 +8,8 @@ import { NetworkConfigurationProvider, useNetworkConfiguration } from './Network
 import { PreferredExplorerProvider } from './preferredExplorer';
 import { SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { IWalletNotification } from '@jup-ag/wallet-adapter/dist/types/contexts/WalletConnectionProvider';
+import { useAtom } from 'jotai';
+import { appProps } from 'src/library';
 
 export const HARDCODED_WALLET_STANDARDS: { id: string; name: WalletName; url: string; icon: string }[] = [
   {
@@ -43,9 +45,11 @@ const WalletContextProvider: React.FC<PropsWithChildren<IInit>> = ({ autoConnect
   const network = networkConfiguration as WalletAdapterNetwork;
   const selectedEndpoint: string = useMemo(() => endpoint ?? clusterApiUrl(network), [endpoint, network]);
 
+  const [atom] = useAtom(appProps);
+
   const enableWalletPassthrough = (() => {
     if (typeof window === 'undefined') return undefined;
-    return window.Jupiter.enableWalletPassthrough;
+    return atom?.enableWalletPassthrough;
   })();
 
   const wallets = useMemo(() => {

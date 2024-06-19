@@ -6,6 +6,8 @@ import useTimeDiff from '../useTimeDiff/useTimeDiff';
 import PriceInfo from '../PriceInfo/index';
 import JupButton from '../JupButton';
 import V2SexyChameleonText from '../SexyChameleonText/V2SexyChameleonText';
+import { useAtom } from 'jotai';
+import { appProps } from 'src/library';
 
 const ConfirmationScreen = () => {
   const {
@@ -16,6 +18,7 @@ const ConfirmationScreen = () => {
     quoteResponseMeta,
     jupiter: { loading, refresh },
   } = useSwapContext();
+  const [atom] = useAtom(appProps);
 
   const [hasExpired] = useTimeDiff();
 
@@ -28,17 +31,17 @@ const ConfirmationScreen = () => {
   const onSubmit = useCallback(async () => {
     setScreen('Swapping');
 
-    if (window.Jupiter.onRequestIxCallback) {
+    if (atom?.onRequestIxCallback) {
       const ixAndCb = await onRequestIx();
       if (ixAndCb) {
-        window.Jupiter.onRequestIxCallback(ixAndCb);
+        atom.onRequestIxCallback(ixAndCb);
       } else {
         setScreen('Error');
       }
     } else {
       onSubmitJupiter();
     }
-  }, [onRequestIx, onSubmitJupiter, setScreen]);
+  }, [onRequestIx, onSubmitJupiter, setScreen, atom]);
 
   return (
     <div className="flex flex-col h-full w-full py-4 px-2">

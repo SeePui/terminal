@@ -1,14 +1,16 @@
-import { Provider, useAtom } from 'jotai';
-import JupiterApp from './components/Jupiter';
-import { ContextProvider } from './contexts/ContextProvider';
-import { ScreenProvider } from './contexts/ScreenProvider';
-import { TokenContextProvider } from './contexts/TokenContextProvider';
-import WalletPassthroughProvider from './contexts/WalletPassthroughProvider';
-import { appProps } from './library';
+import { atom, createStore } from 'jotai';
+import React from 'react';
+import JupiterApp from 'src/components/Jupiter';
+import { ContextProvider } from 'src/contexts/ContextProvider';
+import { ScreenProvider } from 'src/contexts/ScreenProvider';
+import { TokenContextProvider } from 'src/contexts/TokenContextProvider';
+import WalletPassthroughProvider from 'src/contexts/WalletPassthroughProvider';
+import { IInit } from 'src/types';
 
-const App = () => {
-  const [props] = useAtom(appProps);
-  if (!props) return null;
+const SFMTerminalRenderer: React.FC<IInit> = (props) => {
+  const store = createStore();
+  const appProps = atom<IInit | undefined>(undefined);
+  store.set(appProps, { ...props });
 
   return (
     <ContextProvider {...props}>
@@ -23,12 +25,6 @@ const App = () => {
   );
 };
 
-const RenderJupiter = () => {
-  return (
-    <Provider store={typeof window !== 'undefined' ? window.Jupiter.store : undefined}>
-      <App />
-    </Provider>
-  );
-};
+SFMTerminalRenderer.displayName = 'SFMTerminalRenderer';
 
-export { RenderJupiter };
+export default SFMTerminalRenderer;

@@ -26,6 +26,8 @@ import { useScreenState } from './ScreenProvider';
 import { useTokenContext } from './TokenContextProvider';
 import { useWalletPassThrough } from './WalletPassthroughProvider';
 import { useAccounts } from './accounts';
+import { useAtom } from 'jotai';
+import { appProps } from 'src/library';
 export interface IForm {
   fromMint: string;
   toMint: string;
@@ -127,6 +129,7 @@ export const SwapContextProvider: FC<{
     maxAccounts,
     children,
   } = props;
+  const [atom] = useAtom(appProps);
   const { screen } = useScreenState();
   const { tokenMap } = useTokenContext();
   const { wallet } = useWalletPassThrough();
@@ -514,16 +517,18 @@ export const SwapContextProvider: FC<{
 
   // onFormUpdate callback
   useEffect(() => {
-    if (typeof window.Jupiter.onFormUpdate === 'function') {
-      window.Jupiter.onFormUpdate(form);
+    if (typeof atom?.onFormUpdate === 'function') {
+      atom.onFormUpdate(form);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form]);
 
   // onFormUpdate callback
   useEffect(() => {
-    if (typeof window.Jupiter.onScreenUpdate === 'function') {
-      window.Jupiter.onScreenUpdate(screen);
+    if (typeof atom?.onScreenUpdate === 'function') {
+      atom.onScreenUpdate(screen);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screen]);
 
   return (

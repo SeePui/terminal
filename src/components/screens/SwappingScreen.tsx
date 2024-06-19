@@ -10,6 +10,8 @@ import { fromLamports } from 'src/misc/utils';
 import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
 import V2SexyChameleonText from '../SexyChameleonText/V2SexyChameleonText';
 import JupiterLogo from 'src/icons/JupiterLogo';
+import { useAtom } from 'jotai';
+import { appProps } from 'src/library';
 
 const ErrorIcon = () => {
   return (
@@ -47,6 +49,8 @@ const SwappingScreen = () => {
   } = useSwapContext();
   const { screen, setScreen } = useScreenState();
 
+  const [atom] = useAtom(appProps);
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const onSwapMore = () => {
@@ -69,16 +73,16 @@ const SwappingScreen = () => {
     if (lastSwapResult?.swapResult && 'error' in lastSwapResult?.swapResult) {
       setErrorMessage(lastSwapResult?.swapResult?.error?.message || '');
 
-      if (window.Jupiter.onSwapError) {
-        window.Jupiter.onSwapError({
+      if (atom?.onSwapError) {
+        atom.onSwapError({
           error: lastSwapResult?.swapResult?.error,
           quoteResponseMeta: lastSwapResult?.quoteResponseMeta,
         });
       }
       return;
     } else if (lastSwapResult?.swapResult && 'txid' in lastSwapResult?.swapResult) {
-      if (window.Jupiter.onSuccess) {
-        window.Jupiter.onSuccess({
+      if (atom?.onSuccess) {
+        atom.onSuccess({
           txid: lastSwapResult?.swapResult?.txid,
           swapResult: lastSwapResult?.swapResult,
           quoteResponseMeta: lastSwapResult?.quoteResponseMeta,
@@ -86,11 +90,11 @@ const SwappingScreen = () => {
       }
       return;
     }
-  }, [lastSwapResult, screen]);
+  }, [lastSwapResult, screen, atom]);
 
   const onClose = () => {
     if (!displayMode || displayMode === 'modal') {
-      window.Jupiter.close();
+      window.close();
     }
 
     reset();

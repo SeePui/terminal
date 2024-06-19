@@ -28,6 +28,8 @@ import SwitchPairButton from './SwitchPairButton';
 import useTimeDiff from './useTimeDiff/useTimeDiff';
 import { Skeleton } from './Skeleton';
 import PriceInfoV2 from './PriceInfoV2';
+import { useAtom } from 'jotai';
+import { appProps } from 'src/library';
 
 const Form: React.FC<{
   onSubmit: () => void;
@@ -47,6 +49,8 @@ const Form: React.FC<{
     formProps: { swapMode, fixedAmount, fixedInputMint, fixedOutputMint },
     jupiter: { quoteResponseMeta: route, loading, error, refresh },
   } = useSwapContext();
+  const [atom] = useAtom(appProps);
+
   const [hasExpired, timeDiff] = useTimeDiff();
   const [inputFromFocus, setInputFromFocus] = useState<boolean>(false);
   const [inputToFocus, setInputToFocus] = useState<boolean>(false);
@@ -159,13 +163,13 @@ const Form: React.FC<{
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      if (window.Jupiter.enableWalletPassthrough && window.Jupiter.onRequestConnectWallet) {
-        window.Jupiter.onRequestConnectWallet();
+      if (atom?.enableWalletPassthrough && atom.onRequestConnectWallet) {
+        atom.onRequestConnectWallet();
       } else {
         setIsWalletModalOpen(true);
       }
     },
-    [setIsWalletModalOpen],
+    [setIsWalletModalOpen, atom],
   );
 
   return (
