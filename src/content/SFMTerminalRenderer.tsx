@@ -1,6 +1,6 @@
 import { atom, createStore } from 'jotai';
 import React from 'react';
-import JupiterApp from 'src/components/Jupiter';
+import { JupiterApp } from 'src/components';
 import { ContextProvider } from 'src/contexts/ContextProvider';
 import { ScreenProvider } from 'src/contexts/ScreenProvider';
 import { TokenContextProvider } from 'src/contexts/TokenContextProvider';

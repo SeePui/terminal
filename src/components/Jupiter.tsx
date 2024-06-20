@@ -55,7 +55,7 @@ const Content = () => {
 
 const queryClient = new QueryClient();
 
-const JupiterApp = (props: IInit) => {
+export const JupiterApp = (props: IInit) => {
   const { displayMode, platformFeeAndAccounts: ogPlatformFeeAndAccounts, formProps, maxAccounts } = props;
   const { connection } = useConnection();
   const { wallet } = useWalletPassThrough();
@@ -119,4 +119,3 @@ const JupiterApp = (props: IInit) => {
   );
 };
 
-export default JupiterApp;
