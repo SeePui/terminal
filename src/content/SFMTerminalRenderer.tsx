@@ -5,11 +5,17 @@ import { ContextProvider } from 'src/contexts/ContextProvider';
 import { ScreenProvider } from 'src/contexts/ScreenProvider';
 import { TokenContextProvider } from 'src/contexts/TokenContextProvider';
 import WalletPassthroughProvider from 'src/contexts/WalletPassthroughProvider';
-import { IInit } from 'src/types';
+import { IInit } from 'types';
 
-const SFMTerminalRenderer: React.FC<IInit> = (props) => {
-  const store = createStore();
-  const appProps = atom<IInit | undefined>(undefined);
+// Create a store
+const store = createStore();
+
+// Define and export the appProps atom
+export const appProps = atom<IInit | undefined>(undefined);
+
+// Define and export the SolanafmTerminalRenderer component
+export const SolanafmTerminalRenderer: React.FC<IInit> = (props) => {
+  // Set the appProps in the store
   store.set(appProps, { ...props });
 
   return (
@@ -24,7 +30,3 @@ const SFMTerminalRenderer: React.FC<IInit> = (props) => {
     </ContextProvider>
   );
 };
-
-SFMTerminalRenderer.displayName = 'SFMTerminalRenderer';
-
-export default SFMTerminalRenderer;

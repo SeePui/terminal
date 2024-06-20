@@ -29,7 +29,7 @@ import useTimeDiff from './useTimeDiff/useTimeDiff';
 import { Skeleton } from './Skeleton';
 import PriceInfoV2 from './PriceInfoV2';
 import { useAtom } from 'jotai';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 const Form: React.FC<{
   onSubmit: () => void;

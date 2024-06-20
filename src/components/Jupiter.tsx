@@ -8,7 +8,7 @@ import { SwapContextProvider } from 'src/contexts/SwapContext';
 import { USDValueProvider } from 'src/contexts/USDValueProvider';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
 import { ROUTE_CACHE_DURATION } from 'src/misc/constants';
-import { IInit } from 'src/types';
+import { IInit } from 'types';
 
 import { PublicKey } from '@solana/web3.js';
 import { PrioritizationFeeContextProvider } from 'src/contexts/PrioritizationFeeContextProvider';

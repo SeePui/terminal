@@ -11,7 +11,7 @@ import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
 import V2SexyChameleonText from '../SexyChameleonText/V2SexyChameleonText';
 import JupiterLogo from 'src/icons/JupiterLogo';
 import { useAtom } from 'jotai';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 const ErrorIcon = () => {
   return (

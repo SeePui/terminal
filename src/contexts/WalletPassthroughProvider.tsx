@@ -2,7 +2,7 @@ import { useWallet, Wallet, WalletName } from '@jup-ag/wallet-adapter';
 import { PublicKey } from '@solana/web3.js';
 import { useAtom } from 'jotai';
 import React, { createContext, FC, PropsWithChildren, ReactNode, useContext, useMemo } from 'react';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 interface IWalletPassThrough {
   publicKey: PublicKey | null;

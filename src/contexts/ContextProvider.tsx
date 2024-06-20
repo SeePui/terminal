@@ -3,13 +3,13 @@ import React, { PropsWithChildren, useState } from 'react';
 
 import { clusterApiUrl } from '@solana/web3.js';
 import { ReactNode, useMemo } from 'react';
-import { IInit } from 'src/types';
+import { IInit } from 'types';
 import { NetworkConfigurationProvider, useNetworkConfiguration } from './NetworkConfigurationProvider';
 import { PreferredExplorerProvider } from './preferredExplorer';
 import { SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { IWalletNotification } from '@jup-ag/wallet-adapter/dist/types/contexts/WalletConnectionProvider';
 import { useAtom } from 'jotai';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 export const HARDCODED_WALLET_STANDARDS: { id: string; name: WalletName; url: string; icon: string }[] = [
   {

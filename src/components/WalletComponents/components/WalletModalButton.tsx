@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import React, { FC, MouseEvent, useCallback } from 'react';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 export const WalletModalButton: FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
   const { connecting } = useWalletPassThrough();

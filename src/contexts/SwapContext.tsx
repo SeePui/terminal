@@ -20,14 +20,14 @@ import {
 import { DEFAULT_SLIPPAGE, WRAPPED_SOL_MINT } from 'src/constants';
 import { fromLamports, getAssociatedTokenAddressSync, hasNumericValue } from 'src/misc/utils';
 import { useReferenceFeesQuery } from 'src/queries/useReferenceFeesQuery';
-import { FormProps, IInit, IOnRequestIxCallback } from 'src/types';
+import { FormProps, IInit, IOnRequestIxCallback } from 'types';
 import { usePrioritizationFee } from './PrioritizationFeeContextProvider';
 import { useScreenState } from './ScreenProvider';
 import { useTokenContext } from './TokenContextProvider';
 import { useWalletPassThrough } from './WalletPassthroughProvider';
 import { useAccounts } from './accounts';
 import { useAtom } from 'jotai';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 export interface IForm {
   fromMint: string;
   toMint: string;

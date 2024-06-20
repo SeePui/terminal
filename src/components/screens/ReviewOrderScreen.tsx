@@ -7,7 +7,7 @@ import PriceInfo from '../PriceInfo/index';
 import JupButton from '../JupButton';
 import V2SexyChameleonText from '../SexyChameleonText/V2SexyChameleonText';
 import { useAtom } from 'jotai';
-import { appProps } from 'src/library';
+import { appProps } from 'src/content/SFMTerminalRenderer';
 
 const ConfirmationScreen = () => {
   const {
